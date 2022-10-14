@@ -62,7 +62,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const App = () => {
-  const [fields, setFields] = useState({ title: "", body: "" });
+  const [fields, setFields] = useState({ title: "農莊廚房", body: "正在限時促銷促銷 低至七折優惠" });
   const [loading, setLoading] = useState(false);
   const classes = useStyles();
   const handleFields = e =>
@@ -78,10 +78,17 @@ const App = () => {
     }
 
     setLoading(true);
-    const req = await axios.post(NOTIFICATIONS_SERVER, {
-      title,
-      body
-    });
+    // const req = await axios.post(NOTIFICATIONS_SERVER, {
+    //   title,
+    //   body
+    // });
+    const sentense = '你附近的'+ title + '正在限時促銷促銷 低至七折優惠'
+    axios.post(`https://app.nativenotify.com/api/notification`, {
+      appId: 4309,
+      appToken: "dVDECel6oWHjQgza4G84wV",
+      title: 'Nearby Flash Sale 限時特價促銷',
+      body: sentense
+  });
     setFields({ title: "", body: "" });
     setLoading(false);
   };
@@ -89,8 +96,8 @@ const App = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Typography component="h1" variant="h5">
-          Expo Notifications Tool
+        <Typography component="h1" variant="h6">
+          Eatchy restaurant notification Demo
         </Typography>
         <Avatar className={classes.avatar}>
           <Notifications />
@@ -149,34 +156,17 @@ const App = () => {
           </Grid>
         </form>
       </div>
-      <div className={classes.table}>
-        <Typography variant="subtitle1">
-          Last Notifications Sent (Example):
-        </Typography>
-        <Table />
-      </div>
+
       <div className={classes.icons}>
-        <Tooltip title="See Source Code">
+        <Tooltip title="Visit Eatchy">
           <IconButton>
             <Link
               color="inherit"
               target="__blank"
               rel="noopener"
-              href="https://github.com/jose-donato/expo-notifications-tool"
+              href="https://www,eatchyhk.com"
             >
               <GitHubIcon />
-            </Link>
-          </IconButton>
-        </Tooltip>
-        <Tooltip title="Questions? DM me">
-          <IconButton>
-            <Link
-              color="inherit"
-              target="__blank"
-              rel="noopener"
-              href="https://twitter.com/whynot1__"
-            >
-              <TwitterIcon />
             </Link>
           </IconButton>
         </Tooltip>
